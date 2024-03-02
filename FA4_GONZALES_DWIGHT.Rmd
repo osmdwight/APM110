@@ -1,0 +1,60 @@
+---
+title: "Formative Assesment 4"
+author: "Dwight Gonzales"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+
+# 1
+
+Percentage of Image Supplied: 15,20,25,40
+Percetage of Relevant Image: 50,60,80,85
+
+Find the Overall Percetage:
+```{r}
+
+overall_percentage<-(0.15*+0.50+0.20*0.60+0.25*0.80+0.40*0.85)*100
+overall_percentage
+cat("Overall percentage: ", overall_percentage, "\n")
+```
+
+# 2
+
+```{r}
+
+sample_space <- c("HH", "HT", "TH", "TT")
+
+E1 <- c("HH", "TT")
+E2 <- c("HH", "HT")
+E3 <- c("TH", "HH")
+
+P_E1 <- length(E1) / length(sample_space)
+P_E2 <- length(E2) / length(sample_space)
+P_E3 <- length(E3) / length(sample_space)
+
+P_E1_intersect_E2 <- length(intersect(E1, E2)) / length(sample_space)
+P_E1_intersect_E3 <- length(intersect(E1, E3)) / length(sample_space)
+P_E2_intersect_E3 <- length(intersect(E2, E3)) / length(sample_space)
+
+
+pairwise_independent <- all(
+  P_E1_intersect_E2 == P_E1 * P_E2,
+  P_E1_intersect_E3 == P_E1 * P_E3,
+  P_E2_intersect_E3 == P_E2 * P_E3
+)
+
+
+mutually_independent <- P_E1_intersect_E2 == P_E1 * P_E2 * P_E3
+
+cat("Pairwise independent:", pairwise_independent, "\n")
+cat("Mutually independent:", mutually_independent, "\n")
+
+```
+
+
+
+
+
