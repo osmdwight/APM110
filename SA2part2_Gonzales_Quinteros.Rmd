@@ -1,0 +1,72 @@
+---
+title: "Analysis Report"
+author: "Your Name"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r}
+options(repos = "https://cloud.r-project.org/")
+
+install.packages(c("readr", "dplyr", "anytime", "plyr", "dgof", "fitdistrplus", "VGAM", "DataCombine", "data.table", "EnvStats", "ggplot2", "tsallisqexp", "poweRlaw", "fitur"))
+
+suppressMessages(suppressWarnings({
+suppressPackageStartupMessages({
+  library(readr)
+  library(dplyr)
+  library(anytime)
+  library(plyr)
+  library(dgof)
+  library(fitdistrplus)
+  library(VGAM)
+  library(DataCombine)
+  library(data.table)
+  library(EnvStats)
+  library(ggplot2)
+  library(tsallisqexp)
+  library(poweRlaw)
+  library(fitur)
+  })
+
+
+setwd("C:\\Users\\DWIGHT JIRO\\OneDrive\\Pictures\\Screenshots\\Home\\Gonzales,Dwight,M")
+
+df<- read_csv("ETH_1H.csv", show_col_types = FALSE)
+
+close_prices <- df$Close
+
+# Ensure 'close_prices' is numeric
+close_prices <- as.numeric(close_prices)
+
+# Create a histogram
+histogram <- ggplot(data = df, aes(x = close_prices)) +
+  geom_histogram(binwidth = 50, fill = "blue", color = "black") +
+  labs(
+    title = "Histogram of 'Close' Prices",
+    x = "Close Prices",
+    y = "Frequency"
+  )
+print(histogram)
+
+# Create a Q-Q plot
+qq_plot <- ggplot(data = df, aes(sample = close_prices)) +
+  geom_qq() +
+  geom_qq_line() +
+  labs(
+    title = "Q-Q Plot of 'Close' Prices",
+    x = "Theoretical Quantiles",
+    y = "Sample Quantiles"
+  )
+print(qq_plot)
+
+}))
+  
+```
+
+### Summary
+
+The Q-Q plot's divergence from the diagonal line towards higher quantiles in a positively skewed distribution signifies deviations from normality, especially in the tail of the distribution where extreme values are present. This visual assessment of normality is an alternative to the Shapiro-Wilk test, providing insights into how the data deviates from a normal distribution, particularly in terms of skewness and the presence of outliers.
+
+  
+
